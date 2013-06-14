@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity  {
 
 	private Camera mCamera;
 	private CameraPreview mPreview;
@@ -25,9 +22,17 @@ public class MainActivity extends Activity implements OnClickListener {
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
 		mCamera.setFaceDetectionListener(new FaceDetect());
-	//	mCamera.setDisplayOrientation(90);
-		Button start_detect = (Button) findViewById(R.id.start_detect);
-		start_detect.setOnClickListener(this);
+			mCamera.setDisplayOrientation(90);
+		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+		// Create our Preview view and set it as the content of our activity.
+		mPreview = new CameraPreview(this, mCamera);
+
+
+		System.out.println(preview);
+
+		preview.addView(mPreview);
+
+
 	}
 
 	@Override
@@ -60,18 +65,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		return c; // returns null if camera is unavailable
 	}
 
-	@Override
-	public void onClick(View v) {
-		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview3);
-		// Create our Preview view and set it as the content of our activity.
-		mPreview = new CameraPreview(this, mCamera);
-
-
-		System.out.println(preview);
-
-		preview.addView(mPreview);
-		
-	}
 }
 /**
  * 
