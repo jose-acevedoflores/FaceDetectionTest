@@ -8,9 +8,10 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.FrameLayout;
 
-public class MainActivity extends Activity  {
+public class FaceDetectMain extends Activity  {
 
 	private Camera mCamera;
 	private CameraPreview mPreview;
@@ -18,7 +19,7 @@ public class MainActivity extends Activity  {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.facedetect_main);
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
 		mCamera.setFaceDetectionListener(new FaceDetect());
@@ -27,9 +28,9 @@ public class MainActivity extends Activity  {
 
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new CameraPreview(this, mCamera);
-		
+
 		preview.addView(mPreview);
-		//preview.setVisibility(View.INVISIBLE);
+		preview.setVisibility(View.INVISIBLE);
 
 	}
 
@@ -71,12 +72,24 @@ public class MainActivity extends Activity  {
  */
 class FaceDetect implements FaceDetectionListener{
 
+	private int previousY=0; 
+	private long prevTime;
+	
 	@Override
 	public void onFaceDetection(Face[] faces, Camera camera) {
 		if(faces.length >= 1)
-			Log.d("FaceDetectTest", "face detected: "+ faces.length +
-					" Face 1 Location X: " + faces[0].rect.centerX() +
-					"Y: " + faces[0].rect.centerY() );
+		{	
+//			Log.d("FaceDetectTest", "face detected: "+ faces.length +
+//					" Face 1 Location X: " + faces[0].rect.centerX() +
+//					" || Y: " + faces[0].rect.centerY() );
+			
+			
+			if( Math.abs(faces[0].rect.centerY() ) - Math.abs(previousY) >= 40 && System.currentTimeMillis() -  prevTime  < 1000)
+				System.out.println("YEs");
+			
+			prevTime = System.currentTimeMillis();
+			previousY = faces[0].rect.centerY();
+		}
 		else
 			Log.d("FaceDetectTest", "Wu " + faces.length);
 	}

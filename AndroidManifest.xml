@@ -18,7 +18,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="msrp.aida.facedetecttest.MainActivity"
+            android:name="msrp.aida.facedetecttest.FaceDetectMain"
+            android:screenOrientation="landscape"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
