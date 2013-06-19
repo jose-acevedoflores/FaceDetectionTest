@@ -40,6 +40,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             if (params.getMaxNumDetectedFaces() > 0){
                 // camera supports face detection, so can start it:
                 mCamera.startFaceDetection();
+                Log.d("DEBUG", "Face detection started");
             }
             
         } catch (IOException e) {

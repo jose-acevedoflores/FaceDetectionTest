@@ -30,7 +30,7 @@ public class MainActivity extends Activity  {
 		mPreview = new CameraPreview(this, mCamera);
 		
 		preview.addView(mPreview);
-		preview.setVisibility(View.INVISIBLE);
+		//preview.setVisibility(View.INVISIBLE);
 
 	}
 
