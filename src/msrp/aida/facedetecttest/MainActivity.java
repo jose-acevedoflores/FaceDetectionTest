@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.FrameLayout;
 
 public class MainActivity extends Activity  {
@@ -18,20 +19,18 @@ public class MainActivity extends Activity  {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.camera_preview);
+		setContentView(R.layout.activity_main);
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
 		mCamera.setFaceDetectionListener(new FaceDetect());
-			mCamera.setDisplayOrientation(90);
+		mCamera.setDisplayOrientation(90);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new CameraPreview(this, mCamera);
-
-
-		System.out.println(preview);
-
+		
 		preview.addView(mPreview);
-
+		preview.setVisibility(View.INVISIBLE);
 
 	}
 
